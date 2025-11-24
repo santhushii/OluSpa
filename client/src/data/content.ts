@@ -22,8 +22,8 @@ export const site = {
     ogImage: "/og/og.jpg"
   },
   branding: {
-    primaryLogo: "/img/logo-mark.jpg",
-    footerLogo: "/img/logo-mark.jpg",
+    primaryLogo: "/img/logo-mark.png",
+    footerLogo: "/img/logo-mark.png",
     awardBadge: "/img/bestweb-badge.svg"
   },
   navigation: {
@@ -49,6 +49,17 @@ export const site = {
     subtitle:
       "Rejuvenating, traditional therapies by experienced practitioners in a serene beach-side retreat.",
     image: "/img/hero.jpg",
+    images: [
+      "/img/1.jpeg",
+      "/img/2.jpeg",
+      "/img/3.jpeg",
+      "/img/4.jpeg",
+      "/img/5.jpeg",
+      "/img/6.jpeg",
+      "/img/7.jpeg",
+      "/img/8.jpeg",
+      "/img/9.jpeg"
+    ],
     imageAlt: "Herbal oils and flowers in a serene spa setting",
     badgeLabel: undefined,
     ctaLabel: "Book Now",

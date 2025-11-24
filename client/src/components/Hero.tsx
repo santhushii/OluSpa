@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { sentence, letter, fadeUp } from "../utils/variants";
 import Badge from "./Badge";
 import type { SiteContent } from "../types/content";
@@ -13,6 +14,7 @@ export default function Hero({
   title,
   subtitle,
   image,
+  images,
   imageAlt,
   badgeLabel,
   ctaLabel,
@@ -28,6 +30,26 @@ export default function Hero({
     enabled: { variants: fadeUp, initial: "hidden" as const, animate: "visible" as const }
   });
 
+  const slideshowImages = useMemo(() => {
+    if (images && images.length > 0) return images;
+    return image ? [image] : [];
+  }, [images, image]);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [slideshowImages]);
+
+  useEffect(() => {
+    if (slideshowImages.length <= 1) return;
+    const timer = window.setInterval(
+      () => setCurrentIndex((prev) => (prev + 1) % slideshowImages.length),
+      7000
+    );
+    return () => window.clearInterval(timer);
+  }, [slideshowImages]);
+
   return (
     <section className="relative overflow-hidden" aria-labelledby="hero-title">
       <motion.div 
@@ -36,20 +58,23 @@ export default function Hero({
         animate={{ scale: 1 }}
         transition={{ duration: 15, ease: "easeOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 2 }}
       >
-        <motion.img 
-          src={image} 
-          alt={imageAlt} 
-          className="h-full w-full object-cover" 
-          loading="eager"
-          animate={{
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+        <AnimatePresence mode="wait">
+          {slideshowImages.map((src, index) =>
+            index === currentIndex ? (
+              <motion.img
+                key={src}
+                src={src}
+                alt={imageAlt}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="eager"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              />
+            ) : null
+          )}
+        </AnimatePresence>
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-[#040b07]/75 via-[#1a2e21]/55 to-[#1a3b2a]/20 mix-blend-multiply"
           aria-hidden="true"
@@ -75,6 +100,19 @@ export default function Hero({
           }}
         />
       </motion.div>
+      {slideshowImages.length > 1 && (
+        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {slideshowImages.map((_, index) => (
+            <button
+              key={`hero-dot-${index}`}
+              type="button"
+              className={`h-2.5 w-2.5 rounded-full border border-white/70 transition ${index === currentIndex ? "bg-white" : "bg-white/30"}`}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Show slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
       <div className="absolute inset-0 flex items-center">
         <div className="mx-auto max-w-container px-4">
           {badgeLabel ? (

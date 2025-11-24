@@ -54,6 +54,7 @@ export type SiteContent = {
     title: string;
     subtitle: string;
     image: string;
+    images?: ReadonlyArray<string>;
     imageAlt: string;
     badgeLabel?: string;
     ctaLabel?: string;
