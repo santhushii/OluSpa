@@ -114,6 +114,54 @@ export default function App() {
           </Section>
         )}
 
+        <Section title="Visit Us" id="map" leaf>
+          <motion.div
+            className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] items-stretch"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.div
+              className="rounded-3xl bg-white/90 p-6 shadow-soft ring-1 ring-olu-beige/80"
+              variants={fadeUp}
+            >
+              <h3 className="text-xl font-serifDisplay text-olu-ink">Our Location</h3>
+              <p className="mt-3 text-sm text-olu-body leading-relaxed">
+                #810/15, Maradana Road, Thalaramba, Kaburugamuwa, Mirissa, Sri Lanka
+              </p>
+              <p className="mt-2 text-sm text-olu-body/80">
+                Find us between the coastal highway and the beach—steps away from the ocean and surrounded by lush greenery.
+              </p>
+              <a
+                href={buildGoogleMapsLink(contact.address)}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center gap-2 rounded-full border border-olu-green px-5 py-2 text-sm font-semibold text-olu-green transition hover:bg-olu-green hover:text-white"
+              >
+                Open in Google Maps
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                </svg>
+              </a>
+            </motion.div>
+
+            <motion.div
+              className="overflow-hidden rounded-[32px] border border-white/60 shadow-[0_25px_60px_rgba(0,0,0,0.15)]"
+              variants={fadeUp}
+            >
+              <iframe
+                title="OLU Ayurveda Beach Resort Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.212016547084!2d80.4607324!3d5.7352442999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae1737e5f1c929f%3A0x87dbeed52b21965b!2s810%2F15%20Maradana%20Rd%2C%20Mirissa%2081700%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1732951800000!5m2!1sen!2slk"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="h-[360px] w-full border-0"
+                allowFullScreen
+              />
+            </motion.div>
+          </motion.div>
+        </Section>
+
         <Section title={ctaTitle} id="book" leaf>
           <motion.div 
             className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]"
