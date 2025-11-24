@@ -28,7 +28,7 @@ export default function FeatureCard({ title, description, image, alt, onClick }:
         transition={{ type: "spring", stiffness: 280, damping: 22 }}
         onClick={onClick}
       >
-        <div className="bg-white/80 backdrop-blur rounded-[28px] shadow-[0_30px_60px_rgba(0,0,0,0.08)]">
+        <div className="bg-white/80 backdrop-blur rounded-[28px] shadow-[0_30px_60px_rgba(0,0,0,0.08)] flex flex-col h-full">
           <motion.div 
             className="relative h-52 w-full overflow-hidden rounded-t-[28px] bg-olu-beige"
             whileHover={{ scale: 1.03 }}
@@ -49,7 +49,7 @@ export default function FeatureCard({ title, description, image, alt, onClick }:
               Spa
             </div>
           </motion.div>
-          <div className="p-6 md:p-7">
+          <div className="flex flex-col flex-1 p-6 md:p-7">
             <span className="inline-flex items-center gap-3 text-[10px] tracking-[0.55em] uppercase text-olu-gold font-semibold">
               <span className="h-px w-6 bg-olu-gold/60" aria-hidden="true" />
               Signature
@@ -59,7 +59,7 @@ export default function FeatureCard({ title, description, image, alt, onClick }:
             <p className="mt-3 text-sm sm:text-base text-olu-body leading-relaxed">{description}</p>
             <button
               type="button"
-              className="mt-5 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-olu-green"
+              className="mt-auto inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-olu-green pt-5"
             >
               Discover
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
