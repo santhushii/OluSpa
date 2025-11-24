@@ -3,7 +3,7 @@ import type { ContactInfo, SiteContent, SocialLink } from "../types/content";
 const sharedSocials: ReadonlyArray<SocialLink> = [
   { label: "Facebook", href: "https://facebook.com", icon: "facebook" },
   { label: "Instagram", href: "https://instagram.com", icon: "instagram" },
-  { label: "Twitter", href: "https://twitter.com", icon: "twitter" }
+  { label: "TikTok", href: "https://www.tiktok.com/@oluayurveda", icon: "tiktok" }
 ] as const;
 
 const primaryContact: ContactInfo = {
@@ -117,7 +117,7 @@ export const site = {
       { label: "Booking.com", href: "https://www.booking.com/hotel/lk/olu-ayurveda-beach-resort.html?aid=356980&label=gog235jc-10CAsohQFCGW9sdS1heXVydmVkYS1iZWFjaC1yZXNvcnRIM1gDaIUBiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALc_t3IBsACAdICJGQ4YjY2MDQyLWExMDQtNGRjZi1iMzY1LWNmMjA0ZjkxYzdkY9gCAeACAQ&sid=c56c2d17a032b5e7e98bc9dd08389b2a&dest_id=-2228935&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1763147622&srpvid=26dd872eaca40d3d&type=total&ucfs=1&" }
     ],
     socials: sharedSocials,
-    note: "Copyright © 2025 - OLU Ayurveda Beach Resort - All Rights Reserved. Concept, Design & Development by Web Lankan"
+    note: "Copyright © 2025 - OLU Ayurveda Beach Resort - All Rights Reserved. Concept, Design & Development by DW Marketing"
   },
   gallery: {
     images: [
@@ -132,7 +132,7 @@ export const site = {
     ]
   },
   whatsapp: {
-    phone: primaryContact.phone,
+    phone: "+94 77 503 0038",
     message: "Hello! I'm interested in learning more about your Ayurveda treatments and would like to book a session."
   },
   testimonials: {
@@ -231,10 +231,10 @@ export const site = {
   stats: {
     items: [
       {
-        number: 5000,
+        number: 1250,
         suffix: "+",
-        label: "Happy Guests",
-        description: "Trusted by visitors worldwide"
+        label: "Guests",
+        description: "Welcomed visitors worldwide"
       },
       {
         number: 15,

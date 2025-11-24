@@ -23,6 +23,12 @@ const icons: Record<SocialIconName, (props: IconProps) => JSX.Element> = {
       {title ? <title>{title}</title> : null}
       <path d="M20 7.4c.7-.5 1.2-1.1 1.6-1.8-.7.3-1.3.5-2 .6a3.5 3.5 0 0 0-6 2.4c0 .3 0 .6.1.8A10 10 0 0 1 4 5.6a3.5 3.5 0 0 0 1.1 4.6c-.5 0-1-.2-1.5-.4v.1a3.5 3.5 0 0 0 2.9 3.4c-.3.1-.7.1-1 .1h-.7a3.5 3.5 0 0 0 3.3 2.5A7 7 0 0 1 3 18.4a10 10 0 0 0 5.4 1.6c6.5 0 10-5.4 10-10V9c.7-.5 1.3-1.1 1.8-1.8-.6.3-1.3.5-2 .6.7-.4 1.2-1 1.5-1.6z" />
     </svg>
+  ),
+  tiktok: ({ className, title }) => (
+    <svg viewBox="0 0 24 24" className={className} role="img" aria-hidden={title ? undefined : true} focusable="false">
+      {title ? <title>{title}</title> : null}
+      <path d="M18.2 7.7a5.6 5.6 0 0 1-3-1v8.2a5.2 5.2 0 1 1-5.2-5.2 5.1 5.1 0 0 1 1 .1v2.6a2.3 2.3 0 0 0-.9-.2 2.4 2.4 0 1 0 2.4 2.4V3h2.8a3 3 0 0 0 3 3h.9v2.8a6 6 0 0 1-2-.9Z" />
+    </svg>
   )
 };
 
@@ -31,7 +37,8 @@ type Props = IconProps & {
 };
 
 export function SocialIcon({ name, className = "h-5 w-5 fill-current", title }: Props) {
-  return icons[name]({ className, title });
+  const IconComponent = icons[name];
+  return IconComponent ? IconComponent({ className, title }) : null;
 }
 
 

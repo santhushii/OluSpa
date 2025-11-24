@@ -1,4 +1,4 @@
-export type SocialIcon = "facebook" | "instagram" | "twitter";
+export type SocialIcon = "facebook" | "instagram" | "twitter" | "tiktok";
 
 export type SocialLink = {
   label: string;
