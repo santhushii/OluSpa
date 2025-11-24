@@ -112,7 +112,7 @@ export const site = {
       title: "Yoga",
       description:
         "Gentle postures and breathwork to cultivate balance, flexibility, and inner peace.",
-      image: "/img/yoga.jpg",
+      image: "/img/yoga.jpeg",
       alt: "Yoga by the beach"
     }
   ],
@@ -138,12 +138,12 @@ export const site = {
       { src: "/img/acupuncture.jpg", alt: "Acupuncture therapy session", category: "Treatments" },
       { src: "/img/spa-packages.jpg", alt: "Spa package essentials", category: "Treatments" },
       { src: "/img/facial-treatments.jpg", alt: "Ayurvedic facial care", category: "Treatments" },
-      { src: "/img/yoga.jpg", alt: "Yoga by the beach", category: "Activities" },
+      { src: "/img/yoga.jpeg", alt: "Yoga by the beach", category: "Activities" },
       { src: "/img/hero.jpg", alt: "Serene beach setting", category: "Resort" }
     ]
   },
   whatsapp: {
-    phone: "+94 77 503 0038",
+    phone: "+94775030038",
     message: "Hello! I'm interested in learning more about your Ayurveda treatments and would like to book a session."
   },
   testimonials: {
