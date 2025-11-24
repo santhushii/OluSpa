@@ -55,11 +55,11 @@ export default function FeatureCard({ title, description, image, alt, onClick }:
               Signature
               <span className="h-px w-6 bg-olu-gold/60" aria-hidden="true" />
             </span>
-            <h3 className="mt-4 text-2xl font-semibold text-olu-ink font-serifDisplay">{title}</h3>
-            <p className="mt-3 text-sm text-olu-body leading-relaxed">{description}</p>
+            <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-olu-ink font-serifDisplay">{title}</h3>
+            <p className="mt-3 text-sm sm:text-base text-olu-body leading-relaxed">{description}</p>
             <button
               type="button"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-olu-green"
+              className="mt-5 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-olu-green"
             >
               Discover
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">

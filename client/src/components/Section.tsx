@@ -44,7 +44,7 @@ export default function Section({ title, children, subdued = false, id, leaf = f
           <div className="relative px-6 py-10 md:px-10 md:py-12">
             <motion.h2
               id={id ? `${id}-title` : undefined}
-              className="text-3xl md:text-[2.6rem] font-semibold text-olu-ink font-serifDisplay tracking-[0.08em]"
+              className="text-2xl sm:text-3xl md:text-[2.6rem] font-semibold text-olu-ink font-serifDisplay tracking-[0.08em]"
               {...headingAnimation}
             >
               {displayChars.map((character, index) => (

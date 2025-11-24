@@ -60,19 +60,19 @@ export default function Stats({ stats }: Props) {
           <div className="absolute inset-x-4 top-4 h-px bg-gradient-to-r from-transparent via-olu-gold/60 to-transparent opacity-70" />
           <div className="absolute -bottom-12 left-1/2 h-20 w-32 -translate-x-1/2 rounded-full bg-olu-green/15 blur-2xl" />
           <div className="relative">
-            <p className="text-[11px] uppercase tracking-[0.4em] text-olu-gold mb-3">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-olu-gold mb-3">
               {String(index + 1).padStart(2, "0")}
             </p>
-            <div className="text-4xl md:text-5xl font-semibold text-olu-green font-serifDisplay drop-shadow-sm mb-2">
+            <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-olu-green font-serifDisplay drop-shadow-sm mb-2">
               {isInView ? (
                 <AnimatedNumber value={stat.number} suffix={stat.suffix} />
               ) : (
                 `0${stat.suffix ?? ""}`
               )}
             </div>
-            <h3 className="text-lg font-semibold text-olu-ink mb-1">{stat.label}</h3>
+            <h3 className="text-base sm:text-lg font-semibold text-olu-ink mb-1">{stat.label}</h3>
             {stat.description && (
-              <p className="text-sm text-olu-body/70">{stat.description}</p>
+              <p className="text-xs sm:text-sm text-olu-body/70">{stat.description}</p>
             )}
           </div>
         </motion.div>

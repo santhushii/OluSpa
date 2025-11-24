@@ -84,7 +84,7 @@ export default function Hero({
           ) : null}
           <motion.h1
             id="hero-title"
-            className="text-white text-4xl md:text-6xl font-semibold leading-tight drop-shadow-lg"
+            className="text-white text-3xl sm:text-4xl md:text-6xl font-semibold leading-tight drop-shadow-lg"
             {...headingAnimation}
           >
             {chars.map((c, i) => (
@@ -97,7 +97,7 @@ export default function Hero({
               </motion.span>
             ))}
           </motion.h1>
-          <motion.p className="text-white/95 mt-4 md:mt-5 max-w-2xl text-base md:text-lg leading-relaxed" {...supportingAnimation}>
+          <motion.p className="text-white/95 mt-4 md:mt-5 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed" {...supportingAnimation}>
             {subtitle}
           </motion.p>
           {ctaLabel && (
