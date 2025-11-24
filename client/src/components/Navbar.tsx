@@ -22,8 +22,8 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
   const handleNavigate = () => setMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#050706] text-white">
-      <nav className="mx-auto flex max-w-container items-center justify-between px-4 py-5">
+    <header className="sticky top-0 z-40 bg-white/95 text-[#050706] shadow-[0_5px_25px_rgba(0,0,0,0.08)]">
+      <nav className="mx-auto flex max-w-container items-center justify-between px-4 py-3 md:py-4">
         <Link
           to="/"
           className="flex items-center gap-3 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
@@ -33,16 +33,16 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           <img
             src={branding.primaryLogo}
             alt="OLU Ayurveda Beach logo"
-            className="h-20 w-auto md:h-24 lg:h-28"
+            className="h-16 w-auto md:h-20 lg:h-24 transition-transform duration-200 hover:scale-105"
             loading="eager"
           />
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           {onCtaClick ? (
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white px-6 py-[11px] text-[10px] font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-[0_10px_18px_rgba(0,0,0,0.25)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:translate-y-[-2px] hover:shadow-[0_12px_20px_rgba(0,0,0,0.3)] active:translate-y-0 md:px-10 md:py-[15px] md:text-[11px]"
+              className="inline-flex items-center justify-center rounded-full bg-olu-green px-5 py-2 text-[9px] font-semibold uppercase tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px] md:px-7 md:py-[11px] md:text-[10px]"
               onClick={() => {
                 handleNavigate();
                 onCtaClick();
@@ -53,7 +53,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           ) : (
             <a
               href={navigation.cta.href}
-              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white px-6 py-[11px] text-[10px] font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-[0_10px_18px_rgba(0,0,0,0.25)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:translate-y-[-2px] hover:shadow-[0_12px_20px_rgba(0,0,0,0.3)] active:translate-y-0 md:px-10 md:py-[15px] md:text-[11px]"
+              className="inline-flex items-center justify-center rounded-full bg-olu-green px-5 py-2 text-[9px] font-semibold uppercase tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px] md:px-7 md:py-[11px] md:text-[10px]"
               onClick={(e) => {
                 handleNavigate();
                 handleSmoothScroll(e);
@@ -64,7 +64,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           )}
           <button
             type="button"
-            className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.35em] text-white/80 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:text-white md:text-[11px]"
+            className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.35em] text-olu-body/70 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:text-olu-body md:text-[11px]"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((value) => !value)}
@@ -72,17 +72,17 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
             <span>Menu</span>
             <span className="flex flex-col gap-1">
               <motion.span
-                className="block h-[2px] w-6 bg-white md:w-7"
+                className="block h-[2px] w-6 bg-olu-body md:w-7"
                 animate={menuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.span
-                className="block h-[2px] w-6 bg-white md:w-7"
+                className="block h-[2px] w-6 bg-olu-body md:w-7"
                 animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.span
-                className="block h-[2px] w-6 bg-white md:w-7"
+                className="block h-[2px] w-6 bg-olu-body md:w-7"
                 animate={menuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.2 }}
               />
