@@ -44,26 +44,37 @@ export default function Stats({ stats }: Props) {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <div ref={ref} className="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <div ref={ref} className="grid grid-cols-2 gap-5 md:grid-cols-4">
       {stats.map((stat, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: index * 0.1, duration: 0.6 }}
-          className="text-center"
+          initial={{ opacity: 0, y: 25, scale: 0.95 }}
+          animate={
+            isInView
+              ? { opacity: 1, y: 0, scale: 1 }
+              : { opacity: 0, y: 25, scale: 0.95 }
+          }
+          transition={{ delay: index * 0.12, duration: 0.5, type: "spring" }}
+          className="relative overflow-hidden rounded-3xl border border-white/50 bg-white/70 p-6 text-center shadow-[0_25px_45px_rgba(0,0,0,0.08)] backdrop-blur"
         >
-          <div className="text-4xl md:text-5xl font-bold text-olu-green mb-2 font-serifDisplay">
-            {isInView ? (
-              <AnimatedNumber value={stat.number} suffix={stat.suffix} />
-            ) : (
-              "0" + stat.suffix
+          <div className="absolute inset-x-4 top-4 h-px bg-gradient-to-r from-transparent via-olu-gold/60 to-transparent opacity-70" />
+          <div className="absolute -bottom-12 left-1/2 h-20 w-32 -translate-x-1/2 rounded-full bg-olu-green/15 blur-2xl" />
+          <div className="relative">
+            <p className="text-[11px] uppercase tracking-[0.4em] text-olu-gold mb-3">
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <div className="text-4xl md:text-5xl font-semibold text-olu-green font-serifDisplay drop-shadow-sm mb-2">
+              {isInView ? (
+                <AnimatedNumber value={stat.number} suffix={stat.suffix} />
+              ) : (
+                `0${stat.suffix ?? ""}`
+              )}
+            </div>
+            <h3 className="text-lg font-semibold text-olu-ink mb-1">{stat.label}</h3>
+            {stat.description && (
+              <p className="text-sm text-olu-body/70">{stat.description}</p>
             )}
           </div>
-          <h3 className="text-lg font-semibold text-olu-ink mb-1">{stat.label}</h3>
-          {stat.description && (
-            <p className="text-sm text-olu-body/70">{stat.description}</p>
-          )}
         </motion.div>
       ))}
     </div>

@@ -35,17 +35,33 @@ body,
 
 body {
   color: var(--olu-body);
-  background: var(--olu-cream);
+  background: radial-gradient(circle at top, rgba(59, 158, 104, 0.08), transparent 45%),
+    radial-gradient(circle at 20% 20%, rgba(201, 162, 106, 0.18), transparent 35%),
+    var(--olu-cream);
   font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overscroll-behavior-y: none;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(47, 47, 47, 0.04) 1px, transparent 0);
+  background-size: 220px 220px;
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  z-index: -2;
 }
 
 .section-leaf {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .section-leaf::after {
@@ -55,10 +71,24 @@ body {
   background-image: url("/img/leaf-overlay.jpg");
   background-repeat: no-repeat;
   background-position: right top;
-  background-size: clamp(200px, 28vw, 360px);
-  opacity: 0.35;
+  background-size: clamp(220px, 30vw, 420px);
+  opacity: 0.3;
   pointer-events: none;
   mix-blend-mode: multiply;
+  z-index: -1;
+}
+
+.section-leaf::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: -120px;
+  width: clamp(200px, 30vw, 360px);
+  height: clamp(200px, 30vw, 360px);
+  background: radial-gradient(circle, rgba(59, 158, 104, 0.18), transparent 60%);
+  filter: blur(5px);
+  opacity: 0.8;
+  z-index: -1;
 }
 
 h1,
@@ -130,6 +160,25 @@ button {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(59, 158, 104, 0.15), rgba(201, 162, 106, 0.15));
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(59, 158, 104, 0.5), rgba(201, 162, 106, 0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* Enhanced logo visibility */
