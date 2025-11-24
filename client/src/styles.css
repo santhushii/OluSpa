@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --olu-green: #2e8b57;
+  --olu-green-700: #276a45;
+  --olu-seafoam: #3b9e68;
+  --olu-gold: #c9a26a;
+  --olu-beige: #f5f1e8;
+  --olu-sand: #f7efe2;
+  --olu-cream: #fbf7f0;
+  --olu-ink: #2f2f2f;
+  --olu-body: #555555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  color: var(--olu-body);
+  background: var(--olu-cream);
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+.section-leaf {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-leaf::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/img/leaf-overlay.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: clamp(200px, 28vw, 360px);
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--olu-ink);
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+p,
+li,
+a,
+span {
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+a {
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Skip to content link (hidden by default, visible on focus) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Better image loading */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Smooth transitions for interactive elements */
+a,
+button {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Floating animation for subtle movement */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced logo visibility */
+.drop-shadow-lg {
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.3)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.2));
+}
+
+/* Logo glow effect on hover */
+.logo-glow {
+  transition: filter 0.3s ease;
+}
+
+.logo-glow:hover {
+  filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.3)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.2)) drop-shadow(0 0 20px rgba(46, 139, 87, 0.3));
+}
+
+/* Better focus indicators */
+*:focus-visible {
+  outline-offset: 2px;
+}
+
+/* Prevent layout shift during image loading */
+img[loading="lazy"] {
+  background: linear-gradient(90deg, var(--olu-beige) 25%, var(--olu-sand) 50%, var(--olu-beige) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+

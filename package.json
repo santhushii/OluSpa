@@ -1,0 +1,14 @@
+{
+  "name": "olu-ayurveda-page",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n CLIENT,SERVER -c green,cyan \"pnpm --filter client dev\" \"pnpm --filter server dev\"",
+    "build": "pnpm --filter client build && pnpm --filter server build",
+    "start": "pnpm --filter server start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "pnpm": "^9.0.0"
+  }
+}
+
