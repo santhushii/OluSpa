@@ -10,11 +10,12 @@ import { handleSmoothScroll } from "../utils/scroll";
 type Props = {
   branding: SiteContent["branding"];
   navigation: SiteContent["navigation"];
+  onCtaClick?: () => void;
 };
 
 const isInternalLink = (href: string) => href.startsWith("/");
 
-export default function Navbar({ branding, navigation }: Props) {
+export default function Navbar({ branding, navigation, onCtaClick }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   useBodyScrollLock(menuOpen);
 
@@ -38,16 +39,29 @@ export default function Navbar({ branding, navigation }: Props) {
         </Link>
 
         <div className="flex items-center gap-4">
-          <a
-            href={navigation.cta.href}
-            className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white px-6 py-[11px] text-[10px] font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-[0_10px_18px_rgba(0,0,0,0.25)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:translate-y-[-2px] hover:shadow-[0_12px_20px_rgba(0,0,0,0.3)] active:translate-y-0 md:px-10 md:py-[15px] md:text-[11px]"
-            onClick={(e) => {
-              handleNavigate();
-              handleSmoothScroll(e);
-            }}
-          >
-            {navigation.cta.label}
-          </a>
+          {onCtaClick ? (
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white px-6 py-[11px] text-[10px] font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-[0_10px_18px_rgba(0,0,0,0.25)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:translate-y-[-2px] hover:shadow-[0_12px_20px_rgba(0,0,0,0.3)] active:translate-y-0 md:px-10 md:py-[15px] md:text-[11px]"
+              onClick={() => {
+                handleNavigate();
+                onCtaClick();
+              }}
+            >
+              {navigation.cta.label}
+            </button>
+          ) : (
+            <a
+              href={navigation.cta.href}
+              className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white px-6 py-[11px] text-[10px] font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-[0_10px_18px_rgba(0,0,0,0.25)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:translate-y-[-2px] hover:shadow-[0_12px_20px_rgba(0,0,0,0.3)] active:translate-y-0 md:px-10 md:py-[15px] md:text-[11px]"
+              onClick={(e) => {
+                handleNavigate();
+                handleSmoothScroll(e);
+              }}
+            >
+              {navigation.cta.label}
+            </a>
+          )}
           <button
             type="button"
             className="flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.35em] text-white/80 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white hover:text-white md:text-[11px]"
@@ -131,16 +145,29 @@ export default function Navbar({ branding, navigation }: Props) {
               </ul>
 
               <div className="space-y-6 text-sm text-white/80 md:justify-self-end">
-                <a
-                  href={navigation.cta.href}
-                  className="inline-flex items-center justify-center rounded-md border border-white/25 bg-white/90 px-8 py-3 text-xs font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-lg transition-all duration-200 hover:bg-white hover:scale-105 active:scale-95"
-                  onClick={(e) => {
-                    handleNavigate();
-                    handleSmoothScroll(e);
-                  }}
-                >
-                  {navigation.cta.label}
-                </a>
+                {onCtaClick ? (
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center rounded-md border border-white/25 bg-white/90 px-8 py-3 text-xs font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-lg transition-all duration-200 hover:bg-white hover:scale-105 active:scale-95"
+                    onClick={() => {
+                      handleNavigate();
+                      onCtaClick();
+                    }}
+                  >
+                    {navigation.cta.label}
+                  </button>
+                ) : (
+                  <a
+                    href={navigation.cta.href}
+                    className="inline-flex items-center justify-center rounded-md border border-white/25 bg-white/90 px-8 py-3 text-xs font-semibold uppercase tracking-[0.45em] text-[#050706] shadow-lg transition-all duration-200 hover:bg-white hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      handleNavigate();
+                      handleSmoothScroll(e);
+                    }}
+                  >
+                    {navigation.cta.label}
+                  </a>
+                )}
 
                 <div className="space-y-2 text-xs uppercase tracking-[0.35em]">
                   <p className="text-white/60">Follow Us On</p>

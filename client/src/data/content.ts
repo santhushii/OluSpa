@@ -10,7 +10,7 @@ const primaryContact: ContactInfo = {
   phone: "+94 77 209 6730",
   email: "info@oluayurvedabeach.lk",
   address: "#810/15, Maradana Road, Thalaramba, Kaburugamuwa, Mirissa, Sri Lanka",
-  hours: "Daily 8:00 AM – 8:00 PM"
+  hours: "Daily 8:00 AM – 9:00 PM"
 };
 
 export const site = {
@@ -50,7 +50,7 @@ export const site = {
       "Rejuvenating, traditional therapies by experienced practitioners in a serene beach-side retreat.",
     image: "/img/hero.jpg",
     imageAlt: "Herbal oils and flowers in a serene spa setting",
-    badgeLabel: "Serene Coastal Retreat",
+    badgeLabel: undefined,
     ctaLabel: "Book Now",
     ctaHref: "#book"
   },
@@ -185,15 +185,15 @@ export const site = {
     items: [
       {
         question: "What is Ayurveda and how does it work?",
-        answer: "Ayurveda is an ancient holistic healing system from India that focuses on balancing the body, mind, and spirit. It uses natural therapies, herbal remedies, massage, and lifestyle modifications to restore harmony and promote optimal health. Our practitioners assess your unique constitution (dosha) and create personalized treatment plans."
+        answer: "Ayurveda is a holistic system from India that balances body, mind, and spirit with herbs, oils, massage, and lifestyle guidance. We review your dosha (body type) during consultation and tailor therapies to restore harmony."
       },
       {
         question: "Do I need to book treatments in advance?",
-        answer: "Yes, we recommend booking treatments in advance to ensure availability, especially during peak seasons. You can book through our website, call us directly, or message us via WhatsApp. We also accept walk-ins subject to availability."
+        answer: "Advance bookings are best, especially on weekends and holidays. Use the website form, call us, or send a WhatsApp message. Walk-ins are welcome when slots are free."
       },
       {
         question: "What should I wear for treatments?",
-        answer: "Comfortable, loose-fitting clothing is recommended. For massage and body treatments, disposable garments are provided for your comfort and privacy. For yoga sessions, comfortable athletic wear is ideal."
+        answer: "Arrive in light, loose outfits. We provide disposable garments for body therapies and towels for comfort. Bring or wear stretch-friendly clothing for yoga."
       },
       {
         question: "How long do treatments typically last?",
@@ -212,19 +212,19 @@ export const site = {
       },
       {
         question: "Are the treatments suitable for beginners?",
-        answer: "Absolutely! Our practitioners are experienced in working with people new to Ayurveda and alternative therapies. We'll explain everything beforehand and ensure you're comfortable throughout your treatment. We welcome all levels of experience."
+        answer: "Yes. Each session begins with a simple briefing and pressure checks so you can relax even if it’s your first time. Feel free to pause and ask questions anytime."
       },
       {
         question: "What are your operating hours?",
-        answer: "We're open daily from 8:00 AM to 8:00 PM. However, specific treatment availability may vary, so we recommend calling ahead or booking online. We can also arrange treatments outside these hours for resort guests."
+        answer: "We open daily from 8.00 AM to 8.00 PM. Evening or early-morning slots can be arranged for in-house guests with 24 hours’ notice."
       },
       {
         question: "Do you offer accommodation packages?",
-        answer: "Yes, we offer wellness packages that combine accommodations with treatment programs. These packages are designed for guests seeking immersive healing experiences. Please contact us for details about accommodation and wellness packages."
+        answer: "Yes. Our wellness stays include rooms, daily treatments, meals, and consultations. Share your preferred length of stay and we will send a personalised itinerary."
       },
       {
         question: "Is there parking available?",
-        answer: "Yes, we have parking available for guests. The parking area is located near the entrance and is free of charge. If you have any special requirements, please let us know when you book."
+        answer: "Complimentary on-site parking is available near the main entrance. Tell us if you require assistance or reserved space for larger vehicles."
       }
     ]
   },

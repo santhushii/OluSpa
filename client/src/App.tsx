@@ -62,7 +62,7 @@ export default function App() {
 
       <ScrollProgress />
       <SkipToContent />
-      <Navbar branding={branding} navigation={navigation} />
+      <Navbar branding={branding} navigation={navigation} onCtaClick={() => openBooking()} />
       <main id="top">
         <Hero {...hero} onPrimaryAction={() => openBooking()} />
 
