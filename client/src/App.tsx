@@ -18,7 +18,7 @@ import TreatmentModal from "./components/TreatmentModal";
 import BookingModal from "./components/BookingModal";
 import type { Feature } from "./types/content";
 import { site } from "./data/content";
-import { sanitizeTelHref } from "./utils/format";
+import { buildGoogleMapsLink, sanitizeTelHref } from "./utils/format";
 import { fadeUp, staggerContainer } from "./utils/variants";
 
 export default function App() {
@@ -129,11 +129,26 @@ export default function App() {
               <p className="text-base leading-relaxed">{ctaText}</p>
               <dl className="space-y-2 text-sm">
                 {[
-                  { label: "Phone", value: contact.phone, href: `tel:${sanitizeTelHref(contact.phone)}`, type: "phone" },
-                  { label: "Email", value: contact.email, href: `mailto:${contact.email}`, type: "email" },
-                  { label: "Address", value: contact.address },
+                  {
+                    label: "Phone",
+                    value: contact.phone,
+                    href: `tel:${sanitizeTelHref(contact.phone)}`
+                  },
+                  {
+                    label: "Email",
+                    value: contact.email,
+                    href: `mailto:${contact.email}`
+                  },
+                  {
+                    label: "Address",
+                    value: contact.address,
+                    href: buildGoogleMapsLink(contact.address),
+                    external: true
+                  },
                   contact.hours ? { label: "Hours", value: contact.hours } : null
-                ].filter(Boolean).map((item, index) => (
+                ]
+                  .filter(Boolean)
+                  .map((item, index) => (
                   <motion.div
                     key={item?.label}
                     initial="hidden"
@@ -148,6 +163,8 @@ export default function App() {
                         <a
                           className="text-olu-green hover:text-olu-green-700 transition-colors duration-200 inline-block hover:translate-x-1"
                           href={item.href}
+                          target={item?.external ? "_blank" : undefined}
+                          rel={item?.external ? "noreferrer" : undefined}
                           aria-label={`${item.label} ${item.value}`}
                         >
                           {item.value}
@@ -169,15 +186,6 @@ export default function App() {
               <p className="text-sm text-olu-body leading-relaxed">
                 Prefer a personal touch? Call us directly, send an email, or reserve instantly and our team will confirm your preferred schedule.
               </p>
-              <motion.a
-                href={`mailto:${contact.email}`}
-                className="mt-5 inline-flex items-center justify-center rounded-full bg-olu-green px-7 py-3 text-sm font-semibold text-white shadow transition-all duration-200 hover:bg-olu-seafoam hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olu-green"
-                aria-label="Enquire about Ayurveda treatments by email"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Enquire Now
-              </motion.a>
               <motion.button
                 type="button"
                 onClick={() => openBooking()}
