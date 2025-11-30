@@ -18,8 +18,13 @@ export const site = {
     title: "Ayurveda Treatments | OLU Ayurveda Beach Villa",
     description:
       "Rejuvenating therapies in a serene beach-side setting: therapeutic massage, Ayurvedic treatments, acupuncture, spa packages, facial treatments, and yoga.",
-    url: "https://example.com/ayurveda",
-    ogImage: "/og/og.jpg"
+    url: "https://oluayurvedabeach.lk",
+    ogImage: "/og/og.jpg",
+    keywords: "Ayurveda treatments, Sri Lanka, Mirissa, spa resort, therapeutic massage, Shirodhara, Kati Vasti, steam bath, yoga, acupuncture, wellness retreat, beach resort, Ayurvedic healing, traditional medicine, spa packages, facial treatments",
+    author: "OLU Ayurveda Beach Resort",
+    siteName: "OLU Ayurveda Beach Resort",
+    locale: "en_US",
+    twitterHandle: "@oluayurveda"
   },
   branding: {
     primaryLogo: "/img/logo-mark.png",
@@ -80,8 +85,8 @@ export const site = {
       key: "ayurvedic-treatments",
       title: "Ayurvedic Treatments",
       description:
-        "Personalized therapies guided by Ayurvedic principles to balance doshas and enhance vitality.",
-      image: "/img/ayurvedic-treatments.jpg",
+        "Authentic traditional therapies: Shirodhara, Kati Vasti, Steam Bath, Pichu (Oil Pack), Lepana (Paste Applications), and Pinda Sweda (Herbal Stamping). Each treatment is personalized to balance your doshas and restore harmony.",
+      image: "/img/ayurvedic-treatments.jpeg",
       alt: "Ayurvedic oils and herbs"
     },
     {
@@ -96,15 +101,15 @@ export const site = {
       key: "spa-packages",
       title: "Spa Packages",
       description:
-        "Curated bundles that combine massage, herbal steam, and body rituals for full rejuvenation.",
-      image: "/img/spa-packages.jpg",
+        "Complete wellness experiences: Full Body Massage with Shirodhara; Full Body Massage, Shirodhara & Steam Bath; or Full Body Massage, Shirodhara & Herbal Bath. Each package is designed for deep relaxation and holistic healing.",
+      image: "/img/spa-packages.jpeg",
       alt: "Spa package essentials"
     },
     {
       key: "facial-treatments",
       title: "Facial Treatments",
       description: "Nourishing facials using herbal blends for refreshed, glowing skin.",
-      image: "/img/facial-treatments.jpg",
+      image: "/img/facial-treatments.jpeg",
       alt: "Ayurvedic facial care"
     },
     {
@@ -134,10 +139,10 @@ export const site = {
     images: [
       { src: "/img/hero.jpg", alt: "OLU Ayurveda Beach Resort exterior", category: "Resort" },
       { src: "/img/therapeutic-massage.jpg", alt: "Therapeutic massage session", category: "Treatments" },
-      { src: "/img/ayurvedic-treatments.jpg", alt: "Ayurvedic oils and herbs", category: "Treatments" },
+      { src: "/img/ayurvedic-treatments.jpeg", alt: "Ayurvedic oils and herbs", category: "Treatments" },
       { src: "/img/acupuncture.jpg", alt: "Acupuncture therapy session", category: "Treatments" },
-      { src: "/img/spa-packages.jpg", alt: "Spa package essentials", category: "Treatments" },
-      { src: "/img/facial-treatments.jpg", alt: "Ayurvedic facial care", category: "Treatments" },
+      { src: "/img/spa-packages.jpeg", alt: "Spa package essentials", category: "Treatments" },
+      { src: "/img/facial-treatments.jpeg", alt: "Ayurvedic facial care", category: "Treatments" },
       { src: "/img/yoga.jpeg", alt: "Yoga by the beach", category: "Activities" },
       { src: "/img/hero.jpg", alt: "Serene beach setting", category: "Resort" }
     ]

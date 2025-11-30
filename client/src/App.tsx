@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "./components/SEO";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -45,20 +45,88 @@ export default function App() {
     setBookingOpen(true);
   };
 
+  // Structured Data for LocalBusiness (Spa/Health & Beauty)
+  const businessStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "HealthAndBeautyBusiness",
+    "name": "OLU Ayurveda Beach Resort",
+    "description": site.meta.description,
+    "url": site.meta.url,
+    "logo": `${site.meta.url}${site.branding.primaryLogo}`,
+    "image": `${site.meta.url}${site.meta.ogImage}`,
+    "telephone": contact.phone,
+    "email": contact.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "#810/15, Maradana Road, Thalaramba, Kaburugamuwa",
+      "addressLocality": "Mirissa",
+      "addressRegion": "Southern Province",
+      "addressCountry": "LK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "5.9456",
+      "longitude": "80.4525"
+    },
+    "openingHours": "Mo-Su 08:00-21:00",
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Ayurveda Treatments",
+      "itemListElement": features.map((feature, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": feature.title,
+          "description": feature.description,
+          "provider": {
+            "@type": "HealthAndBeautyBusiness",
+            "name": "OLU Ayurveda Beach Resort"
+          }
+        },
+        "position": index + 1
+      }))
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": stats?.items.find(s => s.label.includes("Guests"))?.number || 1250
+    },
+    "sameAs": [
+      "https://www.tripadvisor.com/Hotel_Review-g1407334-d23322057-Reviews-Olu_Ayurveda_Beach_Resort-Mirissa_Southern_Province.html",
+      "https://www.agoda.com/olu-ayurveda-beach-resort/hotel/mirissa-lk.html"
+    ]
+  };
+
+  // FAQ Structured Data
+  const faqStructuredData = faq && faq.items.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faq.items.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  } : null;
+
   return (
     <>
-      <Helmet>
-        <title>{site.meta.title}</title>
-        <meta name="description" content={site.meta.description} />
-        <meta property="og:title" content={site.meta.title} />
-        <meta property="og:description" content={site.meta.description} />
-        <meta property="og:image" content={site.meta.ogImage} />
-        <meta property="og:url" content={site.meta.url} />
-        <meta property="og:type" content="website" />
-        <meta name="apple-mobile-web-app-title" content="OLU Ayurveda" />
-        <link rel="canonical" href={site.meta.url} />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Helmet>
+      <SEO
+        title={site.hero.title}
+        description={site.meta.description}
+        keywords={site.meta.keywords}
+        image={site.meta.ogImage}
+        url={site.meta.url}
+        type="website"
+        structuredData={[businessStructuredData, ...(faqStructuredData ? [faqStructuredData] : [])]}
+        twitterHandle={site.meta.twitterHandle}
+        siteName={site.meta.siteName}
+        locale={site.meta.locale}
+        author={site.meta.author}
+      />
 
       <ScrollProgress />
       <SkipToContent />

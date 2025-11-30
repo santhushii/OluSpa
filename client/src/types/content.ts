@@ -32,6 +32,11 @@ export type SiteContent = {
     description: string;
     url: string;
     ogImage: string;
+    keywords?: string;
+    author?: string;
+    siteName?: string;
+    locale?: string;
+    twitterHandle?: string;
   };
   branding: {
     primaryLogo: string;

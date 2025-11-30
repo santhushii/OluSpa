@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Send WhatsApp Booking Messages</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      display: none;
+    }
+    
+    .result.show {
+      display: block;
+    }
+    
+    .result h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .result p {
+      color: #666;
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+    
+    .whatsapp-button {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .whatsapp-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    }
+    
+    .message-preview {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .error {
+      background: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      border: 2px solid #fcc;
+    }
+    
+    .success {
+      background: #efe;
+      color: #3c3;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      border: 2px solid #cfc;
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #2196F3;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #1565C0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 Send WhatsApp Booking Message</h1>
+    <p class="subtitle">Enter a booking ID to generate and send a WhatsApp message</p>
+    
+    <div class="info-box">
+      <strong>ℹ️ How it works:</strong> Enter a booking ID, click the button, and WhatsApp will open with the message pre-filled. You just need to click "Send" in WhatsApp.
+    </div>
+    
+    <div class="input-group">
+      <label for="bookingId">Booking ID:</label>
+      <input 
+        type="number" 
+        id="bookingId" 
+        placeholder="Enter booking ID (e.g., 1, 2, 3...)" 
+        min="1"
+        onkeypress="if(event.key === 'Enter') sendMessage()"
+      >
+    </div>
+    
+    <div class="input-group">
+      <label for="apiKey">Admin Key:</label>
+      <input 
+        type="password" 
+        id="apiKey" 
+        placeholder="Enter admin key (default: admin123)" 
+        value="admin123"
+      >
+    </div>
+    
+    <button id="sendButton" onclick="sendMessage()">
+      📱 Get WhatsApp Link & Open
+    </button>
+    
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const API_URL = window.location.origin.replace(':5173', ':5174'); // Adjust if needed
+    
+    async function sendMessage() {
+      const bookingId = document.getElementById('bookingId').value;
+      const apiKey = document.getElementById('apiKey').value;
+      const resultDiv = document.getElementById('result');
+      const sendButton = document.getElementById('sendButton');
+      
+      if (!bookingId) {
+        showError('Please enter a booking ID');
+        return;
+      }
+      
+      if (!apiKey) {
+        showError('Please enter an admin key');
+        return;
+      }
+      
+      // Show loading
+      sendButton.disabled = true;
+      sendButton.innerHTML = '<span class="loading"></span>Loading...';
+      resultDiv.className = 'result';
+      resultDiv.innerHTML = '';
+      
+      try {
+        const response = await fetch(`${API_URL}/api/admin/bookings/${bookingId}/whatsapp`, {
+          headers: { 
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          showSuccess(data, bookingId);
+          
+          // Automatically open WhatsApp after a short delay
+          setTimeout(() => {
+            window.open(data.whatsapp.url, '_blank');
+          }, 500);
+        } else {
+          showError(data.message || 'Failed to get booking details');
+        }
+      } catch (error) {
+        showError('Error: ' + error.message + '. Make sure the server is running on port 5174.');
+      } finally {
+        sendButton.disabled = false;
+        sendButton.innerHTML = '📱 Get WhatsApp Link & Open';
+      }
+    }
+    
+    function showSuccess(data, bookingId) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.className = 'result show';
+      resultDiv.innerHTML = `
+        <div class="success">
+          <strong>✅ Success!</strong> WhatsApp will open in a new window.
+        </div>
+        <h3>Booking Details (ID: ${bookingId})</h3>
+        <p><strong>👤 Customer:</strong> ${data.booking.fullName}</p>
+        <p><strong>💆 Treatment:</strong> ${data.booking.treatment}</p>
+        <p><strong>📅 Date:</strong> ${data.booking.preferredDate}</p>
+        <p><strong>⏰ Time:</strong> ${data.booking.preferredTime}</p>
+        <p><strong>📊 Status:</strong> ${data.booking.status}</p>
+        
+        <a href="${data.whatsapp.url}" target="_blank" class="whatsapp-button">
+          📱 Open WhatsApp Again
+        </a>
+        
+        <details style="margin-top: 15px;">
+          <summary style="cursor: pointer; color: #667eea; font-weight: 600; margin-bottom: 10px;">
+            📄 View Message Preview
+          </summary>
+          <div class="message-preview">${data.whatsapp.message}</div>
+        </details>
+      `;
+    }
+    
+    function showError(message) {
+      const resultDiv = document.getElementById('result');
+      resultDiv.className = 'result show';
+      resultDiv.innerHTML = `
+        <div class="error">
+          <strong>❌ Error:</strong> ${message}
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+

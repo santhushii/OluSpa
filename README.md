@@ -1,34 +1,132 @@
-# OLU Ayurveda Treatments Page
+# OLU Ayurveda Beach Resort - Frontend Only
 
-This monorepo hosts a client-side React SPA and an Express server that together deliver a serene, Ayurveda-inspired landing experience mirroring the look and feel of [oluayurvedabeach.lk](https://www.oluayurvedabeach.lk/).
+A beautiful, modern single-page application for booking Ayurveda treatments.
 
-## Structure
+## 🎯 Project Type
 
-- `client/` – React 18 + Vite + TailwindCSS + Framer Motion single-page app
-- `server/` – Express server that serves the built client with security and compression middleware
-- `package.json` (root) – scripts for running both workspaces concurrently
+**Frontend-Only** - No backend server or database required!
 
-## Prerequisites
+## 🚀 Quick Start
 
-- Node.js 18+
-- [pnpm](https://pnpm.io/) (install globally if needed: `npm install -g pnpm`)
-
-## Install
+### Install Dependencies
 
 ```bash
-# from repository root
-pnpm install --filter ./client --filter ./server
+pnpm install
 ```
 
-## Scripts
+### Development
 
 ```bash
-pnpm dev    # run client (Vite) and server (Express) together
-pnpm build  # build client and server outputs
-pnpm start  # serve the production build through Express
+pnpm dev
 ```
 
-## Assets
+Opens at: http://localhost:5173
 
-Replace the placeholder images in `client/public/img/` with high-quality spa visuals to align with the brand once available.
+### Build for Production
 
+```bash
+pnpm build
+```
+
+Output: `client/dist/` folder
+
+### Preview Production Build
+
+```bash
+pnpm preview
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Olu_Resort/
+├── client/              # Frontend application
+│   ├── src/
+│   │   ├── api/        # Frontend booking processing
+│   │   ├── components/ # React components
+│   │   ├── utils/      # Utilities (WhatsApp, formatting)
+│   │   └── data/       # Site content
+│   └── package.json
+│
+└── package.json         # Root workspace
+```
+
+**No server folder!** This is a pure frontend application.
+
+---
+
+## ✨ Features
+
+- ✅ Beautiful, responsive design
+- ✅ Booking form with validation
+- ✅ WhatsApp integration (direct URL generation)
+- ✅ Treatment information
+- ✅ Gallery
+- ✅ FAQ section
+- ✅ Contact information
+
+---
+
+## 📱 How Booking Works
+
+1. User fills out booking form
+2. Frontend validates input
+3. Generates WhatsApp message with booking details
+4. Opens WhatsApp automatically with pre-filled message
+5. User sends message to admin
+6. Done! ✅
+
+**No backend, no database, no API calls!**
+
+---
+
+## 🔧 Configuration
+
+### Admin WhatsApp Number
+
+Edit `client/src/data/content.ts`:
+
+```typescript
+whatsapp: {
+  phone: "+94 77 209 6730"  // Change this to your number
+}
+```
+
+---
+
+## 📦 Deployment
+
+### Static Hosting (Recommended)
+
+Deploy the `client/dist/` folder to:
+
+- **Vercel**: `vercel deploy`
+- **Netlify**: `netlify deploy`
+- **GitHub Pages**: Upload `dist/` folder
+- **Any static host**: Upload `dist/` folder
+
+**No server needed!** ✅
+
+---
+
+## 🛠️ Tech Stack
+
+- **React** - UI framework
+- **Vite** - Build tool
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+
+---
+
+## 📝 Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview production build
+
+---
+
+**Simple, fast, frontend-only booking system!** 🎉

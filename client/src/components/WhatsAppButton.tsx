@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { formatPhoneForWhatsApp } from "../utils/format";
 
 type Props = {
   phone: string;
@@ -7,7 +8,7 @@ type Props = {
 
 export default function WhatsAppButton({ phone, message = "Hello! I'm interested in learning more about your Ayurveda treatments." }: Props) {
   // Format phone number (remove spaces, +, etc.)
-  const formattedPhone = phone.replace(/[^\d]/g, "");
+  const formattedPhone = formatPhoneForWhatsApp(phone);
   
   // Create WhatsApp URL
   const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`;
