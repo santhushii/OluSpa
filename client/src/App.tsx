@@ -7,15 +7,17 @@ import FeatureGrid from "./components/FeatureGrid";
 import Footer from "./components/Footer";
 import SkipToContent from "./components/SkipToContent";
 import BackToTop from "./components/BackToTop";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import DownloadButton from "./components/DownloadButton";
-import Gallery from "./components/Gallery";
 import WhatsAppButton from "./components/WhatsAppButton";
-import FAQ from "./components/FAQ";
-import Stats from "./components/Stats";
 import ScrollProgress from "./components/ScrollProgress";
 import TreatmentModal from "./components/TreatmentModal";
 import BookingModal from "./components/BookingModal";
+
+// Lazy load components that aren't immediately visible
+const Gallery = lazy(() => import("./components/Gallery"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const Stats = lazy(() => import("./components/Stats"));
 import type { Feature } from "./types/content";
 import { site } from "./data/content";
 import { buildGoogleMapsLink, sanitizeTelHref } from "./utils/format";
@@ -136,12 +138,12 @@ export default function App() {
 
         <Section title="Wellness at a Glance" id="wellness" leaf>
           <motion.p 
-            className="max-w-3xl text-olu-body leading-relaxed text-base md:text-lg"
+            className="max-w-3xl mx-auto text-center text-olu-body leading-relaxed text-base md:text-lg lg:text-xl"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeUp}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
             {featuresIntro}
           </motion.p>
@@ -149,7 +151,9 @@ export default function App() {
 
         {stats && stats.items.length > 0 && (
           <Section title="Why Choose Us" id="stats" leaf>
-            <Stats stats={stats.items} />
+            <Suspense fallback={<div className="text-center py-8 text-olu-body">Loading...</div>}>
+              <Stats stats={stats.items} />
+            </Suspense>
           </Section>
         )}
 
@@ -157,10 +161,10 @@ export default function App() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={fadeUp}
-            transition={{ delay: 0.3 }}
-            className="mb-8 flex items-center justify-center"
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="mb-8 sm:mb-9 md:mb-10 lg:mb-12 flex items-center justify-center"
           >
             <DownloadButton treatments={features} contactInfo={contact} />
           </motion.div>
@@ -172,19 +176,23 @@ export default function App() {
 
         {gallery && gallery.images.length > 0 && (
           <Section title="Gallery" id="gallery" subdued leaf>
-            <Gallery images={gallery.images} />
+            <Suspense fallback={<div className="text-center py-8 text-olu-body">Loading gallery...</div>}>
+              <Gallery images={gallery.images} />
+            </Suspense>
           </Section>
         )}
 
         {faq && faq.items.length > 0 && (
           <Section title="Frequently Asked Questions" id="faq" leaf>
-            <FAQ faqs={faq.items} />
+            <Suspense fallback={<div className="text-center py-8 text-olu-body">Loading FAQs...</div>}>
+              <FAQ faqs={faq.items} />
+            </Suspense>
           </Section>
         )}
 
         <Section title={ctaTitle} id="book" leaf>
           <motion.div 
-            className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]"
+            className="grid gap-5 sm:gap-6 md:gap-6 lg:gap-8 grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -194,7 +202,7 @@ export default function App() {
               className="space-y-3 text-olu-body"
               variants={fadeUp}
             >
-              <p className="text-base leading-relaxed">{ctaText}</p>
+              <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">{ctaText}</p>
               <dl className="space-y-2 text-sm">
                 {[
                   {
@@ -246,12 +254,12 @@ export default function App() {
               </dl>
             </motion.div>
             <motion.div 
-              className="bg-white/95 rounded-3xl ring-1 ring-olu-beige/80 p-6 shadow-soft hover:shadow-xl transition-shadow duration-300"
+              className="bg-white/95 rounded-2xl sm:rounded-3xl ring-1 ring-olu-beige/80 p-5 sm:p-6 md:p-6 lg:p-8 shadow-soft hover:shadow-xl transition-shadow duration-300"
               variants={fadeUp}
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <p className="text-sm text-olu-body leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-sm lg:text-base text-olu-body leading-relaxed">
                 Prefer a personal touch? Call us directly, send an email, or reserve instantly and our team will confirm your preferred schedule.
               </p>
               <motion.button

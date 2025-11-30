@@ -30,12 +30,14 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           aria-label="OLU Ayurveda Beach Villa home"
           onClick={handleNavigate}
         >
-          <div className="rounded-2xl bg-white px-4 py-2 shadow-[0_8px_18px_rgba(0,0,0,0.35)]">
+          <div className="rounded-2xl bg-white px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 shadow-[0_8px_18px_rgba(0,0,0,0.35)]">
             <img
               src={branding.primaryLogo}
               alt="OLU Ayurveda Beach logo"
-              className="h-14 w-auto md:h-18 lg:h-20 transition-transform duration-200 hover:scale-105"
+              className="h-10 w-auto sm:h-12 md:h-14 lg:h-18 xl:h-20 transition-transform duration-200 hover:scale-105"
               loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </Link>
@@ -44,7 +46,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           {onCtaClick ? (
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-full bg-olu-green px-5 py-2 text-[9px] font-semibold uppercase tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px] md:px-7 md:py-[11px] md:text-[10px]"
+              className="inline-flex items-center justify-center rounded-full bg-olu-green px-3 py-1.5 text-[10px] sm:px-4 sm:py-2 sm:text-[11px] md:px-7 md:py-[11px] md:text-[10px] font-semibold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px]"
               onClick={() => {
                 handleNavigate();
                 onCtaClick();
@@ -55,7 +57,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
           ) : (
             <a
               href={navigation.cta.href}
-              className="inline-flex items-center justify-center rounded-full bg-olu-green px-5 py-2 text-[9px] font-semibold uppercase tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px] md:px-7 md:py-[11px] md:text-[10px]"
+              className="inline-flex items-center justify-center rounded-full bg-olu-green px-3 py-1.5 text-[10px] sm:px-4 sm:py-2 sm:text-[11px] md:px-7 md:py-[11px] md:text-[10px] font-semibold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-white shadow-[0_8px_18px_rgba(46,139,87,0.35)] transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olu-green hover:bg-olu-seafoam hover:translate-y-[-1px]"
               onClick={(e) => {
                 handleNavigate();
                 handleSmoothScroll(e);
@@ -105,9 +107,9 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
             <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: "url(/img/menu-overlay.svg)" }} />
             <div className="absolute inset-0 bg-[#050706]/85" />
 
-            <div className="relative flex h-full flex-col justify-between px-6 py-8 text-white md:px-16">
+            <div className="relative flex h-full flex-col justify-between px-4 py-6 text-white sm:px-6 sm:py-8 md:px-16">
             <div className="flex items-center justify-between">
-              <img src={branding.primaryLogo} alt="OLU Ayurveda Beach logo" className="h-20 w-auto md:h-24" />
+              <img src={branding.primaryLogo} alt="OLU Ayurveda Beach logo" className="h-16 w-auto sm:h-20 md:h-24" />
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}
@@ -118,8 +120,8 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
               </button>
             </div>
 
-            <div className="grid gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
-              <ul className="space-y-4 text-3xl font-serifDisplay uppercase tracking-[0.35em] md:text-[2.5rem] md:leading-snug">
+            <div className="grid gap-8 sm:gap-10 md:gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] md:items-center">
+              <ul className="space-y-3 sm:space-y-4 md:space-y-5 text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-serifDisplay uppercase tracking-[0.3em] sm:tracking-[0.35em] md:leading-snug">
                 {navigation.links.map((item) => (
                   <li key={`overlay-${item.label}`}>
                     {isInternalLink(item.href) ? (
@@ -146,7 +148,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
                 ))}
               </ul>
 
-              <div className="space-y-6 text-sm text-white/80 md:justify-self-end">
+              <div className="space-y-4 sm:space-y-6 text-xs sm:text-sm text-white/80 md:justify-self-end">
                 {onCtaClick ? (
                   <button
                     type="button"
@@ -187,7 +189,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
                   </div>
                 </div>
 
-                <div className="space-y-1 text-[11px] leading-relaxed uppercase tracking-[0.32em] text-white/60">
+                <div className="space-y-1 text-[10px] sm:text-[11px] leading-relaxed uppercase tracking-[0.28em] sm:tracking-[0.32em] text-white/60">
                   <p>
                     Phone :
                     {" "}
@@ -207,7 +209,7 @@ export default function Navbar({ branding, navigation, onCtaClick }: Props) {
               </div>
             </div>
 
-            <p className="text-[10px] uppercase tracking-[0.35em] text-white/50">{navigation.overlay.copyright}</p>
+            <p className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-white/50">{navigation.overlay.copyright}</p>
             </div>
           </motion.div>
         )}

@@ -18,7 +18,7 @@ export const site = {
     title: "Ayurveda Treatments | OLU Ayurveda Beach Villa",
     description:
       "Rejuvenating therapies in a serene beach-side setting: therapeutic massage, Ayurvedic treatments, acupuncture, spa packages, facial treatments, and yoga.",
-    url: "https://oluayurvedabeach.lk",
+    url: "https://oluspa.com",
     ogImage: "/og/og.jpg",
     keywords: "Ayurveda treatments, Sri Lanka, Mirissa, spa resort, therapeutic massage, Shirodhara, Kati Vasti, steam bath, yoga, acupuncture, wellness retreat, beach resort, Ayurvedic healing, traditional medicine, spa packages, facial treatments",
     author: "OLU Ayurveda Beach Resort",

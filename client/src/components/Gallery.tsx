@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { scaleIn, fadeUp } from "../utils/variants";
-import { useMotionPreset } from "../hooks/useMotionPreset";
 
 type GalleryImage = {
   src: string;
@@ -13,17 +11,32 @@ type Props = {
   images: ReadonlyArray<GalleryImage>;
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+
 export default function Gallery({ images }: Props) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const animationProps = useMotionPreset({
-    enabled: {
-      variants: scaleIn,
-      initial: "hidden" as const,
-      whileInView: "visible" as const,
-      viewport: { once: true, amount: 0.2 }
-    },
-    disabled: {}
-  });
 
   const openLightbox = (index: number) => {
     setSelectedImage(index);
@@ -56,31 +69,44 @@ export default function Gallery({ images }: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <motion.div
+        className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={containerVariants}
+      >
         {images.map((image, index) => (
           <motion.div
             key={index}
-            {...animationProps}
+            variants={itemVariants}
             className="relative aspect-square overflow-hidden rounded-xl bg-olu-beige cursor-pointer group"
             onClick={() => openLightbox(index)}
-            whileHover={{ scale: 1.02 }}
+            whileHover={{ scale: 1.05, y: -5 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <img
+            <motion.img
               src={image.src}
               alt={image.alt}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="h-full w-full object-cover"
               loading="lazy"
               decoding="async"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.5 }}
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+            >
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileHover={{ opacity: 1, scale: 1 }}
-                className="text-white text-2xl"
+                className="text-white"
               >
                 <svg
-                  className="w-8 h-8"
+                  className="w-10 h-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -94,28 +120,35 @@ export default function Gallery({ images }: Props) {
                   />
                 </svg>
               </motion.div>
-            </div>
+            </motion.div>
+            {image.category && (
+              <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium">
+                {image.category}
+              </div>
+            )}
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Lightbox */}
+      {/* Enhanced Lightbox */}
       <AnimatePresence>
         {selectedImage !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4"
             onClick={closeLightbox}
             onKeyDown={handleKeyDown}
             tabIndex={-1}
           >
             {/* Close Button */}
-            <button
+            <motion.button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
+              className="absolute top-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 transition-all hover:bg-white/20 hover:scale-110"
               aria-label="Close lightbox"
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
             >
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -125,16 +158,18 @@ export default function Gallery({ images }: Props) {
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
-            </button>
+            </motion.button>
 
-            {/* Previous Button */}
-            <button
+            {/* Navigation Buttons */}
+            <motion.button
               onClick={(e) => {
                 e.stopPropagation();
                 goToPrevious();
               }}
-              className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
+              className="absolute left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 transition-all hover:bg-white/20 hover:scale-110"
               aria-label="Previous image"
+              whileHover={{ scale: 1.1, x: -5 }}
+              whileTap={{ scale: 0.9 }}
             >
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -144,16 +179,17 @@ export default function Gallery({ images }: Props) {
                   d="M15 19l-7-7 7-7"
                 />
               </svg>
-            </button>
+            </motion.button>
 
-            {/* Next Button */}
-            <button
+            <motion.button
               onClick={(e) => {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-110"
+              className="absolute right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 transition-all hover:bg-white/20 hover:scale-110"
               aria-label="Next image"
+              whileHover={{ scale: 1.1, x: 5 }}
+              whileTap={{ scale: 0.9 }}
             >
               <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -163,27 +199,35 @@ export default function Gallery({ images }: Props) {
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </button>
+            </motion.button>
 
             {/* Image */}
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ scale: 0.8, opacity: 0, rotateY: 15 }}
+              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+              exit={{ scale: 0.8, opacity: 0, rotateY: -15 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="relative max-h-[90vh] max-w-[90vw]"
               onClick={(e) => e.stopPropagation()}
             >
               <img
                 src={images[selectedImage].src}
                 alt={images[selectedImage].alt}
-                className="max-h-[90vh] max-w-full rounded-lg object-contain"
+                className="max-h-[90vh] max-w-full rounded-lg object-contain shadow-2xl"
+                loading="eager"
+                decoding="async"
+                sizes="90vw"
               />
               
               {/* Image Counter */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-4 py-2 text-sm text-white backdrop-blur-sm">
+              <motion.div 
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-black/60 backdrop-blur-md px-4 py-2 text-sm text-white border border-white/20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 {selectedImage + 1} / {images.length}
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}
@@ -191,4 +235,3 @@ export default function Gallery({ images }: Props) {
     </>
   );
 }
-

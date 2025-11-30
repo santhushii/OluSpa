@@ -44,7 +44,7 @@ export default function Stats({ stats }: Props) {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <div ref={ref} className="grid grid-cols-2 gap-5 md:grid-cols-4">
+    <div ref={ref} className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-5 lg:gap-6 md:grid-cols-4">
       {stats.map((stat, index) => (
         <motion.div
           key={index}
@@ -55,7 +55,7 @@ export default function Stats({ stats }: Props) {
               : { opacity: 0, y: 25, scale: 0.95 }
           }
           transition={{ delay: index * 0.12, duration: 0.5, type: "spring" }}
-          className="relative overflow-hidden rounded-3xl border border-white/50 bg-white/70 p-6 text-center shadow-[0_25px_45px_rgba(0,0,0,0.08)] backdrop-blur"
+          className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/50 bg-white/70 p-4 sm:p-5 md:p-6 text-center shadow-[0_25px_45px_rgba(0,0,0,0.08)] backdrop-blur"
         >
           <div className="absolute inset-x-4 top-4 h-px bg-gradient-to-r from-transparent via-olu-gold/60 to-transparent opacity-70" />
           <div className="absolute -bottom-12 left-1/2 h-20 w-32 -translate-x-1/2 rounded-full bg-olu-green/15 blur-2xl" />
@@ -63,7 +63,7 @@ export default function Stats({ stats }: Props) {
             <p className="text-[10px] uppercase tracking-[0.4em] text-olu-gold mb-3">
               {String(index + 1).padStart(2, "0")}
             </p>
-            <div className="text-3xl sm:text-4xl md:text-5xl font-semibold text-olu-green font-serifDisplay drop-shadow-sm mb-2">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-olu-green font-serifDisplay drop-shadow-sm mb-2">
               {isInView ? (
                 <AnimatedNumber value={stat.number} suffix={stat.suffix} />
               ) : (

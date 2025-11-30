@@ -32,8 +32,8 @@ export default function SEO({
   author
 }: SEOProps) {
   const fullTitle = title ? `${title} | OLU Ayurveda Beach Resort` : "OLU Ayurveda Beach Resort";
-  const fullUrl = url ? (url.startsWith("http") ? url : `https://oluayurvedabeach.lk${url}`) : "https://oluayurvedabeach.lk";
-  const fullImage = image ? (image.startsWith("http") ? image : `https://oluayurvedabeach.lk${image}`) : "https://oluayurvedabeach.lk/og/og.jpg";
+  const fullUrl = url ? (url.startsWith("http") ? url : `https://oluspa.com${url}`) : "https://oluspa.com";
+  const fullImage = image ? (image.startsWith("http") ? image : `https://oluspa.com${image}`) : "https://oluspa.com/og/og.jpg";
 
   const robotsContent = [];
   if (noindex) robotsContent.push("noindex");
