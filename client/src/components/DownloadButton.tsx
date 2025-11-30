@@ -15,22 +15,41 @@ type Props = {
 export default function DownloadButton({ treatments, contactInfo }: Props) {
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const handleDownload = async () => {
+  const handleDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     setIsGenerating(true);
     try {
-      // Small delay to show loading state
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      // Generate PDF immediately while user interaction is active (important for mobile)
+      // Don't delay on mobile as it breaks the user interaction context
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      if (!isMobile) {
+        // Small delay only on desktop to show loading state
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      }
+      
+      // Generate PDF - this must happen in the user interaction context
       generateTreatmentsPDF(treatments, contactInfo);
       
-      // Give mobile browsers time to process the download
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Give mobile browsers time to process
+      if (isMobile) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
     } catch (error) {
       console.error("Error generating PDF:", error);
       // Better error message for mobile users
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const errorMsg = isMobile 
-        ? "If the download didn't start, please check your browser's download settings or try using a different browser."
-        : "There was an error generating the PDF. Please try again.";
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      
+      let errorMsg = "There was an error generating the PDF. Please try again.";
+      if (isIOS) {
+        errorMsg = "The PDF should open in a new tab. If it didn't, please check your browser's popup settings.";
+      } else if (isMobile) {
+        errorMsg = "If the download didn't start, please check your browser's download settings or try using Chrome browser.";
+      }
+      
       alert(errorMsg);
     } finally {
       setIsGenerating(false);

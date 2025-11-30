@@ -121,60 +121,153 @@ export function generateTreatmentsPDF(treatments: ReadonlyArray<Feature>, contac
     );
   }
 
-  // Save PDF - Mobile-friendly approach
+  // Save PDF - Mobile-friendly approach with multiple fallbacks
   const fileName = `OLU_Ayurveda_Treatments_${new Date().toISOString().split("T")[0]}.pdf`;
   
   // Detect mobile devices
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isChrome = /Chrome/i.test(navigator.userAgent);
   
-  // Use blob approach for better mobile compatibility
-  const pdfBlob = doc.output('blob');
-  const url = URL.createObjectURL(pdfBlob);
-  
-  // Create a temporary link element
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = fileName;
-  link.style.display = 'none';
-  
-  // For iOS, open in new tab as fallback (iOS doesn't support direct downloads)
+  // For iOS, use data URL and open in new tab (iOS doesn't support downloads)
   if (isIOS) {
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    try {
+      const dataUrl = doc.output('dataurlstring');
+      const newWindow = window.open(dataUrl, '_blank');
+      if (newWindow) {
+        // Successfully opened
+        return;
+      } else {
+        // Popup blocked, try creating a link
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          if (document.body.contains(link)) {
+            document.body.removeChild(link);
+          }
+        }, 1000);
+        return;
+      }
+    } catch (error) {
+      console.error('iOS PDF generation failed:', error);
+    }
   }
   
-  // Append to body (required for iOS and some mobile browsers)
-  document.body.appendChild(link);
+  // For Android and other mobile browsers, try blob download
+  if (isMobile) {
+    try {
+      const pdfBlob = doc.output('blob');
+      const blobUrl = URL.createObjectURL(pdfBlob);
+      
+      // Create link element
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      link.style.display = 'none';
+      link.setAttribute('download', fileName);
+      
+      // Append to body
+      document.body.appendChild(link);
+      
+      // Use native click (works better than synthetic events on mobile)
+      if (link.click) {
+        link.click();
+      } else {
+        // Fallback for older browsers
+        const event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        link.dispatchEvent(event);
+      }
+      
+      // Clean up
+      setTimeout(() => {
+        if (document.body.contains(link)) {
+          document.body.removeChild(link);
+        }
+        // Keep blob URL alive longer on mobile
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+      }, 1000);
+      
+      // Also try opening in new tab as fallback for Android
+      if (isAndroid && !isChrome) {
+        setTimeout(() => {
+          window.open(blobUrl, '_blank');
+        }, 500);
+      }
+      
+      return;
+    } catch (error) {
+      console.warn('Mobile blob download failed, trying data URL:', error);
+    }
+  }
   
-  // Trigger download
+  // Method 1: Blob URL with download (desktop and modern mobile)
   try {
+    const pdfBlob = doc.output('blob');
+    const blobUrl = URL.createObjectURL(pdfBlob);
+    
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = fileName;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    
+    // Use native click
     link.click();
     
-    // For iOS, also try opening in new window as fallback
-    if (isIOS) {
-      setTimeout(() => {
-        window.open(url, '_blank');
-      }, 250);
-    }
+    // Clean up
+    setTimeout(() => {
+      if (document.body.contains(link)) {
+        document.body.removeChild(link);
+      }
+      URL.revokeObjectURL(blobUrl);
+    }, 2000);
+    
+    return;
   } catch (error) {
-    console.error('Download failed, trying fallback:', error);
-    // Fallback: open in new tab
-    window.open(url, '_blank');
+    console.warn('Blob method failed, trying data URL:', error);
   }
   
-  // Clean up after a delay
-  setTimeout(() => {
-    if (document.body.contains(link)) {
-      document.body.removeChild(link);
+  // Method 2: Data URL fallback
+  try {
+    const dataUrl = doc.output('dataurlstring');
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = fileName;
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    
+    setTimeout(() => {
+      if (document.body.contains(link)) {
+        document.body.removeChild(link);
+      }
+    }, 1000);
+    
+    return;
+  } catch (error) {
+    console.warn('Data URL method failed, trying direct save:', error);
+  }
+  
+  // Method 3: Direct save (last resort)
+  try {
+    doc.save(fileName);
+  } catch (error) {
+    console.error('All PDF download methods failed:', error);
+    // Final fallback: open PDF data in new window
+    try {
+      const pdfData = doc.output('dataurlstring');
+      window.open(pdfData, '_blank');
+    } catch (finalError) {
+      console.error('Complete PDF download failure:', finalError);
+      alert('Unable to download PDF. Please try using a different browser or device.');
     }
-    // Don't revoke URL immediately on mobile to allow download to complete
-    if (!isMobile) {
-      URL.revokeObjectURL(url);
-    } else {
-      // Revoke after longer delay on mobile
-      setTimeout(() => URL.revokeObjectURL(url), 5000);
-    }
-  }, isMobile ? 1000 : 100);
+  }
 }
 
