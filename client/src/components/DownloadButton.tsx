@@ -21,9 +21,17 @@ export default function DownloadButton({ treatments, contactInfo }: Props) {
       // Small delay to show loading state
       await new Promise((resolve) => setTimeout(resolve, 300));
       generateTreatmentsPDF(treatments, contactInfo);
+      
+      // Give mobile browsers time to process the download
+      await new Promise((resolve) => setTimeout(resolve, 500));
     } catch (error) {
       console.error("Error generating PDF:", error);
-      alert("There was an error generating the PDF. Please try again.");
+      // Better error message for mobile users
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const errorMsg = isMobile 
+        ? "If the download didn't start, please check your browser's download settings or try using a different browser."
+        : "There was an error generating the PDF. Please try again.";
+      alert(errorMsg);
     } finally {
       setIsGenerating(false);
     }

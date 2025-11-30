@@ -121,8 +121,60 @@ export function generateTreatmentsPDF(treatments: ReadonlyArray<Feature>, contac
     );
   }
 
-  // Save PDF
+  // Save PDF - Mobile-friendly approach
   const fileName = `OLU_Ayurveda_Treatments_${new Date().toISOString().split("T")[0]}.pdf`;
-  doc.save(fileName);
+  
+  // Detect mobile devices
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  
+  // Use blob approach for better mobile compatibility
+  const pdfBlob = doc.output('blob');
+  const url = URL.createObjectURL(pdfBlob);
+  
+  // Create a temporary link element
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName;
+  link.style.display = 'none';
+  
+  // For iOS, open in new tab as fallback (iOS doesn't support direct downloads)
+  if (isIOS) {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  }
+  
+  // Append to body (required for iOS and some mobile browsers)
+  document.body.appendChild(link);
+  
+  // Trigger download
+  try {
+    link.click();
+    
+    // For iOS, also try opening in new window as fallback
+    if (isIOS) {
+      setTimeout(() => {
+        window.open(url, '_blank');
+      }, 250);
+    }
+  } catch (error) {
+    console.error('Download failed, trying fallback:', error);
+    // Fallback: open in new tab
+    window.open(url, '_blank');
+  }
+  
+  // Clean up after a delay
+  setTimeout(() => {
+    if (document.body.contains(link)) {
+      document.body.removeChild(link);
+    }
+    // Don't revoke URL immediately on mobile to allow download to complete
+    if (!isMobile) {
+      URL.revokeObjectURL(url);
+    } else {
+      // Revoke after longer delay on mobile
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    }
+  }, isMobile ? 1000 : 100);
 }
 
