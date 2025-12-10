@@ -7,7 +7,7 @@ const sharedSocials: ReadonlyArray<SocialLink> = [
 ] as const;
 
 const primaryContact: ContactInfo = {
-  phone: "+94 77 209 6730",
+  phone: "+94 77 503 0038",
   email: "info@oluayurvedabeach.lk",
   address: "#810/15, Maradana Road, Thalaramba, Kaburugamuwa, Mirissa, Sri Lanka",
   hours: "Daily 8:00 AM – 9:00 PM"
@@ -128,6 +128,7 @@ export const site = {
   },
   footer: {
     partners: [
+      { label: "Google Reviews", href: "https://www.google.com/search?sca_esv=a3683385676924a2&rlz=1C1GCEA_enLK1169LK1169&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E6OH4M2YQm6uHvE26NcWiNQscJ6wK7WqHnhUENAcCe8LvpCaTdiNvsy3VY59gcn9Bi7D-6vocLnhGfgdFACbKdqx_O8pzpkYkQDoEKl6UIjpIxxmkQ%3D%3D&q=Ola+Ayurveda+Beach+Resort+Reviews&sa=X&ved=2ahUKEwjP2J-5j6eRAxXASWwGHTnUAnMQ0bkNegQINRAE&cshid=1764960843083075&biw=1536&bih=730&dpr=1.25" },
       { label: "Tripadvisor", href: "https://www.tripadvisor.com/Hotel_Review-g1407334-d23322057-Reviews-Olu_Ayurveda_Beach_Resort-Mirissa_Southern_Province.html" },
       { label: "Agoda", href: "https://www.agoda.com/olu-ayurveda-beach-resort/hotel/mirissa-lk.html?cid=1844104&ds=cRT8q680i9byajnE" },
       { label: "Booking.com", href: "https://www.booking.com/hotel/lk/olu-ayurveda-beach-resort.html?aid=356980&label=gog235jc-10CAsohQFCGW9sdS1heXVydmVkYS1iZWFjaC1yZXNvcnRIM1gDaIUBiAEBmAEzuAEXyAEM2AED6AEB-AEBiAIBqAIBuALc_t3IBsACAdICJGQ4YjY2MDQyLWExMDQtNGRjZi1iMzY1LWNmMjA0ZjkxYzdkY9gCAeACAQ&sid=c56c2d17a032b5e7e98bc9dd08389b2a&dest_id=-2228935&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1763147622&srpvid=26dd872eaca40d3d&type=total&ucfs=1&" }
@@ -148,8 +149,8 @@ export const site = {
     ]
   },
   whatsapp: {
-    phone: "+94775030038",
-    message: "Hello! I'm interested in learning more about your Ayurveda treatments and would like to book a session."
+    phone: "+94 77 503 0038",
+    message: "Hello! Welcome to OLU Ayurveda Beach Resort. I'm interested in learning more about your Ayurveda spa treatments and would like to book a session. Could you please help me with the details?"
   },
   testimonials: {
     items: [

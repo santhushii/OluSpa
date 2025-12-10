@@ -95,7 +95,7 @@ export default function Hero({
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Slideshow Container - Reduced Height */}
-      <div className="h-[40vh] min-h-[280px] sm:min-h-[320px] md:h-[50vh] md:min-h-[420px] lg:h-[55vh] lg:min-h-[500px] xl:min-h-[550px] w-full relative">
+      <div className="h-[45vh] min-h-[320px] md:min-h-[400px] lg:min-h-[480px] w-full relative">
         <AnimatePresence mode="wait" initial={false}>
           {slideshowImages.map((src, index) =>
             index === currentIndex ? (
@@ -115,9 +115,6 @@ export default function Hero({
                   alt={`${imageAlt} - Slide ${index + 1}`}
                   className="absolute inset-0 h-full w-full object-cover"
                   loading={index === 0 ? "eager" : "lazy"}
-                  fetchPriority={index === 0 ? "high" : "low"}
-                  decoding="async"
-                  sizes="100vw"
                   initial={{ scale: 1.15 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 15, ease: "easeOut", repeat: Infinity, repeatType: "reverse", repeatDelay: 2 }}
@@ -152,20 +149,20 @@ export default function Hero({
             <button
               type="button"
               onClick={goToPrevious}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
               aria-label="Previous slide"
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
             <button
               type="button"
               onClick={goToNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white transition-all duration-300 hover:bg-white/20 hover:scale-110 hover:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
               aria-label="Next slide"
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -186,7 +183,7 @@ export default function Hero({
 
         {/* Enhanced Slide Indicators */}
         {slideshowImages.length > 1 && (
-          <div className="absolute bottom-4 sm:bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:gap-2.5 md:gap-3">
+          <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2.5 md:gap-3">
             {slideshowImages.map((_, index) => (
               <button
                 key={`hero-dot-${index}`}
@@ -195,7 +192,7 @@ export default function Hero({
                 className="group relative"
                 aria-label={`Go to slide ${index + 1}`}
               >
-                <div className={`h-2 w-2 sm:h-2.5 sm:w-2.5 md:h-3 md:w-3 rounded-full border-2 transition-all duration-300 ${
+                <div className={`h-2.5 w-2.5 md:h-3 md:w-3 rounded-full border-2 transition-all duration-300 ${
                   index === currentIndex 
                     ? "bg-white border-white scale-125" 
                     : "bg-white/30 border-white/50 hover:bg-white/50 hover:border-white/70"
@@ -215,7 +212,7 @@ export default function Hero({
 
         {/* Slide Counter */}
         {slideshowImages.length > 1 && (
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs md:text-sm font-medium">
+          <div className="absolute top-6 right-6 z-20 px-4 py-2 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-white text-xs md:text-sm font-medium">
             {currentIndex + 1} / {slideshowImages.length}
           </div>
         )}
@@ -223,7 +220,7 @@ export default function Hero({
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex items-center pointer-events-none">
-        <div className="mx-auto max-w-container px-4 sm:px-6 md:px-4 w-full pointer-events-auto">
+        <div className="mx-auto max-w-container px-4 w-full pointer-events-auto">
           {badgeLabel ? (
             <motion.div className="mb-5 md:mb-6" {...supportingAnimation}>
               <Badge label={badgeLabel} />
@@ -231,7 +228,7 @@ export default function Hero({
           ) : null}
           <motion.h1
             id="hero-title"
-            className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-tight drop-shadow-2xl mb-3 sm:mb-4 md:mb-6"
+            className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight drop-shadow-2xl mb-4 md:mb-6"
             {...headingAnimation}
           >
             {chars.map((c, i) => (
@@ -246,14 +243,14 @@ export default function Hero({
             ))}
           </motion.h1>
           <motion.p 
-            className="text-white/95 mt-3 sm:mt-4 md:mt-5 max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed drop-shadow-lg" 
+            className="text-white/95 mt-4 md:mt-5 max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed drop-shadow-lg" 
             {...supportingAnimation}
           >
             {subtitle}
           </motion.p>
           {ctaLabel && (
             <motion.div 
-              className="mt-6 sm:mt-8 md:mt-10 flex flex-wrap gap-3 sm:gap-4" 
+              className="mt-8 md:mt-10 flex flex-wrap gap-4" 
               {...supportingAnimation}
               initial="hidden"
               animate="visible"
@@ -271,7 +268,7 @@ export default function Hero({
               {onPrimaryAction ? (
                 <motion.button
                   type="button"
-                  className="group inline-flex items-center justify-center rounded-full bg-white/95 backdrop-blur-sm px-6 py-2.5 sm:px-7 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-olu-ink shadow-xl transition-all duration-300 hover:bg-white hover:shadow-2xl hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className="group inline-flex items-center justify-center rounded-full bg-white/95 backdrop-blur-sm px-8 md:px-10 py-3.5 md:py-4 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-olu-ink shadow-xl transition-all duration-300 hover:bg-white hover:shadow-2xl hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                   aria-label={ctaLabel}
                   onClick={onPrimaryAction}
                   whileHover={{ scale: 1.05, y: -2 }}
@@ -280,15 +277,15 @@ export default function Hero({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <span className="mr-1.5 sm:mr-2">{ctaLabel}</span>
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="mr-2">{ctaLabel}</span>
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </motion.button>
               ) : (
                 <motion.a
                   href={ctaHref}
-                  className="group inline-flex items-center justify-center rounded-full bg-white/95 backdrop-blur-sm px-6 py-2.5 sm:px-7 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-olu-ink shadow-xl transition-all duration-300 hover:bg-white hover:shadow-2xl hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  className="group inline-flex items-center justify-center rounded-full bg-white/95 backdrop-blur-sm px-8 md:px-10 py-3.5 md:py-4 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-olu-ink shadow-xl transition-all duration-300 hover:bg-white hover:shadow-2xl hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                   aria-label={ctaLabel}
                   onClick={handleSmoothScroll}
                   whileHover={{ scale: 1.05, y: -2 }}
@@ -297,15 +294,15 @@ export default function Hero({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <span className="mr-1.5 sm:mr-2">{ctaLabel}</span>
-                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <span className="mr-2">{ctaLabel}</span>
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
                 </motion.a>
               )}
               <motion.a
                 href="#gallery"
-                className="group inline-flex items-center justify-center rounded-full border-2 border-white/90 backdrop-blur-sm px-6 py-2.5 sm:px-7 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-white transition-all duration-300 hover:bg-white/20 hover:border-white hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                className="group inline-flex items-center justify-center rounded-full border-2 border-white/90 backdrop-blur-sm px-8 md:px-10 py-3.5 md:py-4 text-xs md:text-sm font-bold uppercase tracking-[0.3em] text-white transition-all duration-300 hover:bg-white/20 hover:border-white hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 onClick={handleSmoothScroll}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -313,7 +310,7 @@ export default function Hero({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.15 }}
               >
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 Gallery

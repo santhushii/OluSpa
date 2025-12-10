@@ -6,7 +6,7 @@ type Props = {
   message?: string;
 };
 
-export default function WhatsAppButton({ phone, message = "Hello! I'm interested in learning more about your Ayurveda treatments." }: Props) {
+export default function WhatsAppButton({ phone, message = "Hello! Welcome to OLU Ayurveda Beach Resort. I'm interested in learning more about your Ayurveda spa treatments and would like to book a session. Could you please help me with the details?" }: Props) {
   // Format phone number (remove spaces, +, etc.)
   const formattedPhone = formatPhoneForWhatsApp(phone);
   

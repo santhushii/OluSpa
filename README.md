@@ -90,7 +90,7 @@ Edit `client/src/data/content.ts`:
 
 ```typescript
 whatsapp: {
-  phone: "+94 77 209 6730"  // Change this to your number
+  phone: "+94 77 503 0038"  // Change this to your number
 }
 ```
 

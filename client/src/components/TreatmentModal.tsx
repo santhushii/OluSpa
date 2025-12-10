@@ -99,7 +99,7 @@ export default function TreatmentModal({ treatment, isOpen, onClose, onBook }: P
                     Book This Treatment
                   </button>
                   <a
-                    href={`tel:+94772096730`}
+                    href={`tel:+94775030038`}
                     className="inline-flex items-center justify-center rounded-full border-2 border-olu-green px-6 py-3 text-sm font-semibold text-olu-green transition-all duration-200 hover:bg-olu-green hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olu-green"
                   >
                     Call to Enquire

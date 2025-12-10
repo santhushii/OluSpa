@@ -282,7 +282,7 @@ Thank you!`;
     const encodedMessage = encodeURIComponent(message);
 
     // WhatsApp number (international format)
-    const whatsappNumber = "94772096730";
+    const whatsappNumber = "94775030038";
 
     // Detect device type
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
