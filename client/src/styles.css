@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@600;700&display=swap");
+/* Fonts are now handled in index.html for better performance */
 
 @tailwind base;
 @tailwind components;
@@ -67,7 +67,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/img/leaf-overlay.jpg");
+  background-image: url("/img/leaf-overlay.webp");
   background-repeat: no-repeat;
   background-position: right top;
   background-size: clamp(200px, 28vw, 360px);

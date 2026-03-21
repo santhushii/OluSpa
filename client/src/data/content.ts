@@ -27,8 +27,8 @@ export const site = {
     twitterHandle: "@oluayurveda"
   },
   branding: {
-    primaryLogo: "/img/logo-mark.png",
-    footerLogo: "/img/logo-mark.png",
+    primaryLogo: "/img/logo-mark.webp",
+    footerLogo: "/img/logo-mark.webp",
     awardBadge: "/img/bestweb-badge.svg"
   },
   navigation: {
@@ -53,17 +53,17 @@ export const site = {
     title: "Ayurveda Treatments",
     subtitle:
       "Rejuvenating, traditional therapies by experienced practitioners in a serene beach-side retreat.",
-    image: "/img/hero.jpg",
+    image: "/img/hero.webp",
     images: [
-      "/img/1.jpeg",
-      "/img/2.jpeg",
-      "/img/3.jpg",
-      "/img/4.jpeg",
-      "/img/5.jpeg",
-      "/img/6.jpeg",
-      "/img/7.jpeg",
-      "/img/8.jpeg",
-      "/img/9.jpeg"
+      "/img/1.webp",
+      "/img/2.webp",
+      "/img/3.webp",
+      "/img/4.webp",
+      "/img/5.webp",
+      "/img/6.webp",
+      "/img/7.webp",
+      "/img/8.webp",
+      "/img/9.webp"
     ],
     imageAlt: "Herbal oils and flowers in a serene spa setting",
     badgeLabel: undefined,
@@ -78,7 +78,7 @@ export const site = {
       title: "Therapeutic Massage",
       description:
         "Relieve tension, improve circulation, and restore calm with targeted pressure and flowing techniques.",
-      image: "/img/therapeutic-massage.jpg",
+      image: "/img/therapeutic-massage.webp",
       alt: "Therapeutic massage in a tranquil setting"
     },
     {
@@ -86,7 +86,7 @@ export const site = {
       title: "Ayurvedic Treatments",
       description:
         "Authentic traditional therapies: Shirodhara, Kati Vasti, Steam Bath, Pichu (Oil Pack), Lepana (Paste Applications), and Pinda Sweda (Herbal Stamping). Each treatment is personalized to balance your doshas and restore harmony.",
-      image: "/img/ayurvedic-treatments.jpeg",
+      image: "/img/ayurvedic-treatments.webp",
       alt: "Ayurvedic oils and herbs"
     },
     {
@@ -94,7 +94,7 @@ export const site = {
       title: "Acupuncture",
       description:
         "Gentle, precise stimulation points to support energy flow, pain relief, and deep relaxation.",
-      image: "/img/acupuncture.jpg",
+      image: "/img/acupuncture.webp",
       alt: "Acupuncture therapy session"
     },
     {
@@ -102,14 +102,14 @@ export const site = {
       title: "Spa Packages",
       description:
         "Complete wellness experiences: Full Body Massage with Shirodhara; Full Body Massage, Shirodhara & Steam Bath; or Full Body Massage, Shirodhara & Herbal Bath. Each package is designed for deep relaxation and holistic healing.",
-      image: "/img/spa-packages.jpeg",
+      image: "/img/spa-packages.webp",
       alt: "Spa package essentials"
     },
     {
       key: "facial-treatments",
       title: "Facial Treatments",
       description: "Nourishing facials using herbal blends for refreshed, glowing skin.",
-      image: "/img/facial-treatments.jpeg",
+      image: "/img/facial-treatments.webp",
       alt: "Ayurvedic facial care"
     },
     {
@@ -117,7 +117,7 @@ export const site = {
       title: "Yoga",
       description:
         "Gentle postures and breathwork to cultivate balance, flexibility, and inner peace.",
-      image: "/img/yoga.jpeg",
+      image: "/img/yoga.webp",
       alt: "Yoga by the beach"
     }
   ],
@@ -138,14 +138,14 @@ export const site = {
   },
   gallery: {
     images: [
-      { src: "/img/hero.jpg", alt: "OLU Ayurveda Beach Resort exterior", category: "Resort" },
-      { src: "/img/therapeutic-massage.jpg", alt: "Therapeutic massage session", category: "Treatments" },
-      { src: "/img/ayurvedic-treatments.jpeg", alt: "Ayurvedic oils and herbs", category: "Treatments" },
-      { src: "/img/acupuncture.jpg", alt: "Acupuncture therapy session", category: "Treatments" },
-      { src: "/img/spa-packages.jpeg", alt: "Spa package essentials", category: "Treatments" },
-      { src: "/img/facial-treatments.jpeg", alt: "Ayurvedic facial care", category: "Treatments" },
-      { src: "/img/yoga.jpeg", alt: "Yoga by the beach", category: "Activities" },
-      { src: "/img/hero.jpg", alt: "Serene beach setting", category: "Resort" }
+      { src: "/img/hero.webp", alt: "OLU Ayurveda Beach Resort exterior", category: "Resort" },
+      { src: "/img/therapeutic-massage.webp", alt: "Therapeutic massage session", category: "Treatments" },
+      { src: "/img/ayurvedic-treatments.webp", alt: "Ayurvedic oils and herbs", category: "Treatments" },
+      { src: "/img/acupuncture.webp", alt: "Acupuncture therapy session", category: "Treatments" },
+      { src: "/img/spa-packages.webp", alt: "Spa package essentials", category: "Treatments" },
+      { src: "/img/facial-treatments.webp", alt: "Ayurvedic facial care", category: "Treatments" },
+      { src: "/img/yoga.webp", alt: "Yoga by the beach", category: "Activities" },
+      { src: "/img/hero.webp", alt: "Serene beach setting", category: "Resort" }
     ]
   },
   whatsapp: {
@@ -274,5 +274,3 @@ export const site = {
     ]
   }
 } satisfies SiteContent;
-
-

@@ -7,15 +7,15 @@ import FeatureGrid from "./components/FeatureGrid";
 import Footer from "./components/Footer";
 import SkipToContent from "./components/SkipToContent";
 import BackToTop from "./components/BackToTop";
-import { useState, useEffect } from "react";
-import DownloadButton from "./components/DownloadButton";
-import Gallery from "./components/Gallery";
+import { useState, useEffect, lazy, Suspense } from "react";
+const Gallery = lazy(() => import("./components/Gallery"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const Stats = lazy(() => import("./components/Stats"));
+const TreatmentModal = lazy(() => import("./components/TreatmentModal"));
+const BookingModal = lazy(() => import("./components/BookingModal"));
+const DownloadButton = lazy(() => import("./components/DownloadButton"));
 import WhatsAppButton from "./components/WhatsAppButton";
-import FAQ from "./components/FAQ";
-import Stats from "./components/Stats";
 import ScrollProgress from "./components/ScrollProgress";
-import TreatmentModal from "./components/TreatmentModal";
-import BookingModal from "./components/BookingModal";
 import type { Feature } from "./types/content";
 import { site } from "./data/content";
 import { buildGoogleMapsLink, sanitizeTelHref } from "./utils/format";
@@ -171,11 +171,13 @@ export default function App() {
           </motion.p>
         </Section>
 
-        {stats && stats.items.length > 0 && (
-          <Section title="Why Choose Us" id="stats" leaf>
-            <Stats stats={stats.items} />
-          </Section>
-        )}
+        <Suspense fallback={<div className="h-48 animate-pulse bg-olu-beige/20" />}>
+          {stats && stats.items.length > 0 && (
+            <Section title="Why Choose Us" id="stats" leaf>
+              <Stats stats={stats.items} />
+            </Section>
+          )}
+        </Suspense>
 
         <Section title="Our Treatments & Packages" subdued id="treatments" leaf>
           <motion.div
@@ -186,7 +188,9 @@ export default function App() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="mb-10 flex items-center justify-center"
           >
+          <Suspense fallback={<div className="h-10 w-48 animate-pulse bg-olu-beige/20 rounded-full mx-auto" />}>
             <DownloadButton treatments={features} contactInfo={contact} />
+          </Suspense>
           </motion.div>
           <FeatureGrid
             items={features}
@@ -194,17 +198,21 @@ export default function App() {
           />
         </Section>
 
-        {gallery && gallery.images.length > 0 && (
-          <Section title="Gallery" id="gallery" subdued leaf>
-            <Gallery images={gallery.images} />
-          </Section>
-        )}
+        <Suspense fallback={<div className="h-96 animate-pulse bg-olu-beige/20" />}>
+          {gallery && gallery.images.length > 0 && (
+            <Section title="Gallery" id="gallery" subdued leaf>
+              <Gallery images={gallery.images} />
+            </Section>
+          )}
+        </Suspense>
 
-        {faq && faq.items.length > 0 && (
-          <Section title="Frequently Asked Questions" id="faq" leaf>
-            <FAQ faqs={faq.items} />
-          </Section>
-        )}
+        <Suspense fallback={<div className="h-64 animate-pulse bg-olu-beige/20" />}>
+          {faq && faq.items.length > 0 && (
+            <Section title="Frequently Asked Questions" id="faq" leaf>
+              <FAQ faqs={faq.items} />
+            </Section>
+          )}
+        </Suspense>
 
         <Section title={ctaTitle} id="book" leaf>
           <motion.div 
@@ -295,19 +303,21 @@ export default function App() {
         <Footer branding={branding} contact={contact} footer={footer} />
         <BackToTop />
         {whatsapp && <WhatsAppButton phone={whatsapp.phone} message={whatsapp.message} />}
-        <TreatmentModal
-          treatment={selectedTreatment}
-          isOpen={!!selectedTreatment}
-          onClose={() => setSelectedTreatment(null)}
-          onBook={(treatment) => openBooking(treatment)}
-        />
-        <BookingModal
-          isOpen={isBookingOpen}
-          onClose={() => setBookingOpen(false)}
-          treatments={features}
-          defaultTreatment={preferredTreatment}
-          whatsappPhone={whatsapp.phone}
-        />
+        <Suspense fallback={null}>
+          <TreatmentModal
+            treatment={selectedTreatment}
+            isOpen={!!selectedTreatment}
+            onClose={() => setSelectedTreatment(null)}
+            onBook={(treatment) => openBooking(treatment)}
+          />
+          <BookingModal
+            isOpen={isBookingOpen}
+            onClose={() => setBookingOpen(false)}
+            treatments={features}
+            defaultTreatment={preferredTreatment}
+            whatsappPhone={whatsapp.phone}
+          />
+        </Suspense>
       </div>
     </>
   );
